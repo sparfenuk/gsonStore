@@ -1,3 +1,5 @@
+package SP;
+
 public enum Type {
     Pineapple("Pineapple"),
     Aplle("Aplle"),
