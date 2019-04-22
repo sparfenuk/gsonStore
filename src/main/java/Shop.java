@@ -1,4 +1,5 @@
 import Kurylo.Fruit;
+import com.google.gson.Gson;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ public class Shop {
 
     public void addFruits(String pathToJsonFile)
     {
-
 
     }
 
