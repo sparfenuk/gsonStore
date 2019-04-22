@@ -1,10 +1,12 @@
 package Kurylo;
 
+import SP.Type;
+
 import java.util.Date;
 
 public class Fruit {
 
-    public Type type;
+    private Type type;
     private int expirationDays;
     private Date deliveryDate;
     private double price;
@@ -12,10 +14,19 @@ public class Fruit {
     public Fruit() {
     }
 
-    public Fruit(int expirationDays, Date deliveryDate, double price) {
+    public Fruit(Type type, int expirationDays, Date deliveryDate, double price) {
+        this.type = type;
         this.expirationDays = expirationDays;
         this.deliveryDate = deliveryDate;
         this.price = price;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public int getExpirationDays() {
