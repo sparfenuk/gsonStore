@@ -4,10 +4,48 @@ import java.util.Date;
 
 public class Fruit {
 
-    private enum Type{};
-    private  int expirationDays;
+    public enum Type {
+        Cranberry,
+        Cucumber,
+        Damson,
+        Dragonfruit,
+        Durian,
+        Elderberry,
+        Feijoa,
+        Fig,
+        GojiBerry,
+        Gooseberry,
+        Grape,
+        Grapefruit,
+        Guava,
+        Honeyberry,
+        Huckleberry,
+        Jabuticaba,
+        Jackfruit,
+        Jambul,
+        JapanesePlum,
+        Jostaberry,
+        Jujube,
+        JuniperBerry,
+        Kiwano,
+        Kiwifruit,
+        Kumquat,
+        Lemon,
+        Lime,
+        Loquat
+    }
+    private int expirationDays;
     private Date deliveryDate;
     private double price;
+
+    public Fruit() {
+    }
+
+    public Fruit(int expirationDays, Date deliveryDate, double price) {
+        this.expirationDays = expirationDays;
+        this.deliveryDate = deliveryDate;
+        this.price = price;
+    }
 
     public int getExpirationDays() {
         return expirationDays;
