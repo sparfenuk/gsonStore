@@ -1,9 +1,6 @@
 package Kalchenya;
 
-import Kurylo.Client;
-import Kurylo.ClientBase;
-import Kurylo.FileLoader;
-import Kurylo.Fruit;
+import Kurylo.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
