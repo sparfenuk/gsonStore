@@ -2,22 +2,25 @@ package Kurylo;
 
 import SP.Type;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Fruit {
 
     private Type type;
-    private int expirationDays;
-    private Date deliveryDate;
+    private int shelfLife;
+    public String date;
+    private Date Date;
     private double price;
 
     public Fruit() {
     }
 
-    public Fruit(Type type, int expirationDays, Date deliveryDate, double price) {
-        this.type = type;
-        this.expirationDays = expirationDays;
-        this.deliveryDate = deliveryDate;
+    public Fruit(String type, int shelfLife, String date, double price) {
+        this.type = Type.valueOf(type);
+        this.shelfLife = shelfLife;
+        this.date = date;
         this.price = price;
     }
 
@@ -25,24 +28,26 @@ public class Fruit {
         return type;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setType(String type) {
+        this.type = Type.valueOf(type);
     }
 
-    public int getExpirationDays() {
-        return expirationDays;
+    public int getShelfLife() {
+        return shelfLife;
     }
 
-    public void setExpirationDays(int expirationDays) {
-        this.expirationDays = expirationDays;
+    public void setShelfLife(int shelfLife) {
+        this.shelfLife = shelfLife;
     }
 
-    public Date getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    public void setDeliveryDate(Date deliveryDate) {
-        this.deliveryDate = deliveryDate;
+    public Date getDate() {
+        try {
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            return format.parse(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public double getPrice() {

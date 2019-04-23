@@ -8,7 +8,8 @@ public enum Type {
     Blueberry("Blueberry"),
     Lemon("Lemon"),
     Lime("Lime"),
-    Grape("Grape");
+    Grape("Grape"),
+    Banana("Banana");
 
     public String fruit;
 
