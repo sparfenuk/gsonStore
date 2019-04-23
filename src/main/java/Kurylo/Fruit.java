@@ -13,6 +13,7 @@ public class Fruit {
     public String date;
     private Date Date;
     private double price;
+    private int count;
 
     public Fruit() {
     }
@@ -56,5 +57,13 @@ public class Fruit {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

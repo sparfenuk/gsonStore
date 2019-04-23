@@ -1,5 +1,8 @@
 package Kalchenya;
 
+import Kurylo.Client;
+import Kurylo.ClientBase;
+import Kurylo.FileLoader;
 import Kurylo.Fruit;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -7,17 +10,12 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Shop {
     private List<Fruit> fruits ;
     private String path;
-
+    private double moneyBalance;
 
     public Shop(List<Fruit> fruits, String path) {
         this.fruits = fruits;
@@ -51,6 +49,25 @@ public class Shop {
         System.out.println("List size after loading -  " + fruits.size());
     }
 
-
+    public void sell(String pathToJsonFile)
+    {
+        String json = FileLoader.loadJsonFromFile(pathToJsonFile);
+        ClientBase clientBase = new Gson().fromJson(json, ClientBase.class);
+        for (Client client:
+             clientBase.clients) {
+            for (Fruit fr:
+                 fruits) {
+                if(fr.getType() == client.getType()){
+                    if(fr.getCount() - client.getCount() >= 0){
+                        fr.setCount(fr.getCount() - client.getCount());
+                        this.moneyBalance += client.getCount() * fr.getPrice();
+                        System.out.println("Here your fruits");
+                    }
+                    else
+                        System.out.println("Sorry, there is no such amount of fruits");
+                }
+            }
+        }
+    }
 
 }
