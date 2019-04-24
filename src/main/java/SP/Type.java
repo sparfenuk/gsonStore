@@ -2,7 +2,7 @@ package SP;
 
 public enum Type {
     Pineapple("Pineapple"),
-    Aplle("Aplle"),
+    Apple("Apple"),
     Strawberry("Strawberry"),
     Orange("Orange"),
     Blueberry("Blueberry"),
