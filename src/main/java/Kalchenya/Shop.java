@@ -18,13 +18,19 @@ public class Shop {
     private String path;
     private double moneyBalance;
 
-    public List<Fruit> getFruits() {
-        return fruits;
-    }
+
 
     public Shop(List<Fruit> fruits, String path) {
         this.fruits = fruits;
         this.path = path;
+    }
+
+    public List<Fruit> getFruits() {
+        return fruits;
+    }
+
+    public double getMoneyBalance() {
+        return moneyBalance;
     }
 
     public void addFruits(String pathToJsonFile, List<Fruit> fruits) throws IOException {
@@ -74,6 +80,28 @@ public class Shop {
         }
     }
 
+
+    public List<Fruit> getSpoiledFruits(Date date) {
+        List<Fruit> spoiled = new ArrayList<Fruit>();
+        for (Fruit f : fruits) {
+            long diffInDays = TimeUnit.DAYS.convert(Math.abs(f.getDate().getTime() - date.getTime()), TimeUnit.MILLISECONDS);
+            if(diffInDays > f.getShelfLife())
+                spoiled.add(f);
+        }
+
+        return spoiled;
+    }
+
+    public List<Fruit> getAvailableFruits(Date date) {
+        List<Fruit> available = new ArrayList<Fruit>();
+        for (Fruit f : fruits) {
+            long diffInDays = TimeUnit.DAYS.convert(Math.abs(f.getDate().getTime() - date.getTime()), TimeUnit.MILLISECONDS);
+            if(diffInDays <= f.getShelfLife())
+                available.add(f);
+        }
+
+        return available;
+    }
 
     public List<Fruit> getSpoiledFruits(Date date, Type type) {
         List<Fruit> spoiled = new ArrayList<Fruit>();
