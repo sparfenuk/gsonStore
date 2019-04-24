@@ -6,6 +6,7 @@ import Kurylo.Fruit;
 import com.google.gson.Gson;
 
 import java.io.FileWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,9 @@ import java.util.List;
 public class Company {
     private List<Shop> shops;
     private long moneyBalance;
+
+    public Company() {
+    }
 
     public Company(List<Shop> shops, long moneyBalance) {
         this.shops = shops;
@@ -30,11 +34,13 @@ public class Company {
 
 
     public void save(String pathToJsonFile){
-        try {
+        try (Writer writer = new FileWriter(pathToJsonFile)){
             Gson gson = new Gson();
-            gson.toJson(this, new FileWriter(pathToJsonFile));
+            gson.toJson(this,writer);
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        catch (Exception e){e.printStackTrace();}
     }
     public void load(String pathToJsonFile){
         try {

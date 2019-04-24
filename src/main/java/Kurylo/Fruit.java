@@ -11,7 +11,6 @@ public class Fruit {
     private Type type;
     private int shelfLife;
     public String date;
-    private Date Date;
     private double price;
     private int count;
 

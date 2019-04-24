@@ -4,10 +4,9 @@ import Kurylo.*;
 import SP.Type;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,32 +32,33 @@ public class Shop {
         return moneyBalance;
     }
 
-    public void addFruits(String pathToJsonFile, List<Fruit> fruits) throws IOException {
-        this.fruits.addAll(fruits);
-        File file = new File(pathToJsonFile);
-        ObjectMapper om = new ObjectMapper();
-        FileWriter fileWriter = new FileWriter(file);
-        String content = om.writerWithDefaultPrettyPrinter().writeValueAsString(fruits);
-        fileWriter.write(content);
-        fileWriter.close();
+    public void addFruits(String pathToJsonFile) {
+        try {
+            Gson gson = new Gson();
+            java.lang.reflect.Type listType = new TypeToken<ArrayList<Fruit>>(){}.getType();
+            this.fruits.addAll(gson.fromJson(new FileReader(pathToJsonFile),listType));
+        }
+        catch (Exception e){e.printStackTrace();}
     }
 
-    public void saveFruits(String pathToJsonFile) throws IOException {
-        File file = new File(pathToJsonFile);
-        FileWriter fw = new FileWriter(file);
-        ObjectMapper om = new ObjectMapper();
-        String content = om.writerWithDefaultPrettyPrinter().writeValueAsString(fruits);
-        System.out.println("Saved to the file " + fruits.size() + " fruits add to shop");
-        fw.write(content);
-        fw.close();
+    public void saveFruits(String pathToJsonFile){
+        try (Writer writer = new FileWriter(pathToJsonFile)){
+            Gson gson = new Gson();
+            gson.toJson(this.fruits,writer);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
-    public void loadFruits(String pathToJsonFile) throws IOException {
-        System.out.println("List size before loading -  " + fruits.size());
-        File file = new File(pathToJsonFile);
-        ObjectMapper mapper = new ObjectMapper();
-        fruits = mapper.readValue(file, mapper.getTypeFactory().constructCollectionType(List.class, Fruit.class));
-        System.out.println("List size after loading -  " + fruits.size());
+    public void loadFruits(String pathToJsonFile){
+        try {
+            Gson gson = new Gson();
+            java.lang.reflect.Type listType = new TypeToken<ArrayList<Fruit>>(){}.getType();
+            this.fruits = gson.fromJson(new FileReader(pathToJsonFile),listType);
+        }
+        catch (Exception e){e.printStackTrace();}
     }
 
     public void sell(String pathToJsonFile) {
